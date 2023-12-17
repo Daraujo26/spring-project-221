@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Petstore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<th:block th:insert="~{layout::header}"></th:block>
+
+<section id="content">
+
+    <h3>View pets</h3>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 50px">&nbsp;</th>
+                    <th style="width: 50px">&nbsp;</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Weight</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr th:if="${pets}" th:each="pet : ${pets}">
+                    <td><a th:href="@{'/edit-pet/' + ${pet.id()}}" sec:authorize="isAuthenticated()" type="button" class="btn btn-light">Edit</a></td>
+                    <td><a th:href="@{'/delete-pet/' + ${pet.id()}}" sec:authorize="isAuthenticated()" type="button" class="btn btn-danger">Delete</a></td>
+                    <td th:text="${pet.id}">1</td>
+                    <td th:text="${pet.name}">Tobey</td>
+                    <td th:text="${pet.type}">Cat</td>
+                    <td th:text="${pet.weight}">15 pounds</td>
+                    <td th:text="${pet.age}">1 year</td>
+                </tr>
+                <tr th:if="${pets.size() eq 0}">
+                    <td colspan="7">No pets are found  :(</td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+<th:block th:insert="~{layout::footer}"></th:block>
+
+</body>
+</html>

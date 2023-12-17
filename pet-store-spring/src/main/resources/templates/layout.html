@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<th:block th:fragment="header">
+
+  <img class="logo" th:src="@{'/img/petstorelogo.png'}" alt="logo">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a sec:authorize="isAuthenticated()" class="nav-link" href="/add-pet">Add Pet</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a sec:authorize="isAnonymous()" class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
+      <div class="searchButton">
+        <form class="d-flex" role="search" method="post" th:action="@{'/search'}">
+          <input class="form-control me-2" name="searchParam" type="search" placeholder="Search (by type)" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+</th:block>
+
+<th:block th:fragment="footer">
+  <footer>
+    <cite>&copy; 2023 Dave's Pet Store</cite>
+  </footer>
+</th:block>
+
+</body>
+</html>
