@@ -1,6 +1,11 @@
-# spring-project-221
-Pet Store Site
+# Pet Store Website Project
 
-Final project for my OOP class from the fall of 2023. Project utilizes the spring framework in java to build a pet store website. 
+This repository contains the final project for my Object-Oriented Programming (OOP) course, completed in Fall 2023. I have developed a pet store website utilizing the Java Spring Framework.
 
-Main features are that the site only permits unauthorized users to view home, contact, and about page using springs security. Upon login, the user can add, edit, or delete the pet's listed on the site.
+Key Features:
+
+Public Access: The website allows all visitors, including unauthorized users, to browse the Home, Contact, and About pages. This feature is implemented using Spring Security to ensure controlled access.
+
+Authenticated User Functions: Once logged in, users gain the ability to add new pets, edit existing pet details, or remove pets from the listing. These functions showcase the dynamic interactivity and user engagement capabilities of the site.
+
+This project showcases the practical application of OOP principles and the versatility of the Spring Framework in creating a functional and secure web application.
