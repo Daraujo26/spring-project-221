@@ -1,8 +1,6 @@
 package edu.psu.petstorespring.controller;
 
 import edu.psu.petstorespring.model.Pet;
-import edu.psu.petstorespring.repository.PetRepository;
-import edu.psu.petstorespring.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import edu.psu.petstorespring.service.impl.PetService;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -28,19 +29,20 @@ public class IndexController {
 
     @PostMapping("/search")
     public String indexFiltered(Model model, @RequestParam String searchParam) {
-        List<Pet> pets = petService.getFilteredWatches(searchParam);
+        List<Pet> pets = petService.searchPetsByType(searchParam);
         model.addAttribute("pets", pets);
         return "home";
     }
 
     @GetMapping("/add-pet")
-    public String addWatchPage() {
+    public String addPetPage() {
         return "addPet";
     }
 
     @PostMapping("/add-pet")
-    public String submitAddWatch(Model model, @RequestParam String name, @RequestParam String type, @RequestParam Double weight, @RequestParam Integer age) {
-        petService.addPet(name, type, weight, age);
+    public String submitAddPet(Model model, @RequestParam String name, @RequestParam String type, @RequestParam Double weight, @RequestParam Integer age, @RequestParam("image") MultipartFile file) {
+        Pet newPet = new Pet(null, name, type, weight, age);
+        petService.addPet(newPet, file);
         List<Pet> pets = petService.getPets();
         model.addAttribute("pets", pets);
         return "home";

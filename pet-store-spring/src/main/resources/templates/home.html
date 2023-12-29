@@ -25,21 +25,23 @@
                     <th>Type</th>
                     <th>Weight</th>
                     <th>Age</th>
+                    <th>Image</th>
                 </tr>
             </thead>
             <tbody>
 
                 <tr th:if="${pets}" th:each="pet : ${pets}">
-                    <td><a th:href="@{'/edit-pet/' + ${pet.id()}}" sec:authorize="isAuthenticated()" type="button" class="btn btn-light">Edit</a></td>
-                    <td><a th:href="@{'/delete-pet/' + ${pet.id()}}" sec:authorize="isAuthenticated()" type="button" class="btn btn-danger">Delete</a></td>
-                    <td th:text="${pet.id}">1</td>
-                    <td th:text="${pet.name}">Tobey</td>
-                    <td th:text="${pet.type}">Cat</td>
-                    <td th:text="${pet.weight}">15 pounds</td>
-                    <td th:text="${pet.age}">1 year</td>
+                    <td><a th:href="@{'/edit-pet/' + ${pet.getId()}}" sec:authorize="isAuthenticated()" type="button" class="btn btn-light">Edit</a></td>
+                    <td><a th:href="@{'/delete-pet/' + ${pet.getId()}}" sec:authorize="isAuthenticated()" type="button" class="btn btn-danger">Delete</a></td>
+                    <td th:text="${pet.getId()}">1</td>
+                    <td th:text="${pet.getName()}">Tobey</td>
+                    <td th:text="${pet.getType()}">Cat</td>
+                    <td th:text="${pet.getWeight()}">15 pounds</td>
+                    <td th:text="${pet.getAge()}">1 year</td>
+                    <td><img th:src="@{${pet.getImageUrl()}}" alt="Pet Image" width="100"></td>
                 </tr>
-                <tr th:if="${pets.size() eq 0}">
-                    <td colspan="7">No pets are found  :(</td>
+                <tr th:if="${pets == null || pets.isEmpty()}">
+                    <td colspan="8">No pets are found  :(</td>
                 </tr>
 
             </tbody>

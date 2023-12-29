@@ -16,7 +16,7 @@
 
     <h3>Add Pet</h3>
 
-    <form method="post" th:action="@{'/add-pet'}">
+    <form method="post" th:action="@{'/add-pet'}" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="nameInput" class="form-label">Name</label>
             <input type="text" name="name" class="form-control" id="nameInput" aria-describedby="petHelp">
@@ -36,6 +36,11 @@
             <label for="ageInput" class="form-label">Age</label>
             <input type="text" name="age" class="form-control" id="ageInput" aria-describedby="ageHelp">
             <div id="ageHelp" class="form-text">How old is the pet?</div>
+        </div>
+        <div class="mb-3">
+            <label for="imageInput" class="form-label">Image</label>
+            <input type="file" name="image" class="form-control" id="imageInput" aria-describedby="imageHelp">
+            <div id="imageHelp" class="form-text">Image must be JPEG or PNG</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

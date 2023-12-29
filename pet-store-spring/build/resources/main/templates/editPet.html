@@ -16,28 +16,31 @@
 
     <h3>Edit Pet</h3>
 
+
+
+
     <form method="post" th:action="@{'/edit-pet'}">
         <div class="mb-3">
             <label for="nameInput" class="form-label">Name</label>
-            <input th:value="${pet.name()}" type="text" name="name" class="form-control" id="nameInput" aria-describedby="nameHelp">
+            <input th:value="${pet.getName()}" type="text" name="name" class="form-control" id="nameInput" aria-describedby="nameHelp">
             <div id="nameHelp" class="form-text">Whats the pets name?</div>
         </div>
         <div class="mb-3">
             <label for="typeInput" class="form-label">Type</label>
-            <input th:value="${pet.type()}" type="text" name="type" class="form-control" id="typeInput" aria-describedby="typeHelp">
+            <input th:value="${pet.getType()}" type="text" name="type" class="form-control" id="typeInput" aria-describedby="typeHelp">
             <div id="typeHelp" class="form-text">What type is the pet?</div>
         </div>
         <div class="mb-3">
             <label for="weightInput" class="form-label">Weight</label>
-            <input th:value="${pet.weight()}" type="text" name="weight" class="form-control" id="weightInput" aria-describedby="weightHelp">
+            <input th:value="${pet.getWeight()}" type="text" name="weight" class="form-control" id="weightInput" aria-describedby="weightHelp">
             <div id="weightHelp" class="form-text">How much does the pet weigh?</div>
         </div>
         <div class="mb-3">
             <label for="ageInput" class="form-label">Age</label>
-            <input th:value="${pet.age()}" type="text" name="age" class="form-control" id="ageInput" aria-describedby="ageHelp">
+            <input th:value="${pet.getAge()}" type="text" name="age" class="form-control" id="ageInput" aria-describedby="ageHelp">
             <div id="ageHelp" class="form-text">How old is the pet?</div>
         </div>
-        <input type="hidden" name="petId" th:value="${pet.id()}">
+        <input type="hidden" name="petId" th:value="${pet.getId()}">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
