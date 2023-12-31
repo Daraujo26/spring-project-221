@@ -18,18 +18,18 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/css/**", "/img/**", "/error", "/search");
+        return (web) -> web.ignoring().requestMatchers("/app/css/**", "/app/img/**", "/app/error", "/app/search");
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/contact", "/about").permitAll()
+                        .requestMatchers("/app/", "/app/contact", "/app/about").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
+                        .loginPage("/app/login")
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
