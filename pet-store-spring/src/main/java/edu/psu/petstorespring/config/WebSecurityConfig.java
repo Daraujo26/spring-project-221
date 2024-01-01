@@ -18,21 +18,22 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/app/css/**", "/app/img/**", "/app/uploads/**", "/app/error", "/app/search");
+        return (web) -> web.ignoring().requestMatchers("/app/css/**", "/app/img/**", "/app/error", "/app/search", "/app/uploads/**");
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/app/", "/app/contact", "/app/about").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/app/login")
-                        .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll);
+            .authorizeHttpRequests((requests) -> requests
+                .antMatchers("/app/css/**", "/app/img/**", "/app/error", "/app/search", "/app/uploads/**").permitAll()
+                .antMatchers("/app/", "/app/contact", "/app/about").permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin((form) -> form
+                .loginPage("/app/login")
+                .permitAll()
+            )
+            .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
@@ -40,11 +41,11 @@ public class WebSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
+            User.withDefaultPasswordEncoder()
+                .username("user")
+                .password("password")
+                .roles("USER")
+                .build();
 
         return new InMemoryUserDetailsManager(user);
     }
