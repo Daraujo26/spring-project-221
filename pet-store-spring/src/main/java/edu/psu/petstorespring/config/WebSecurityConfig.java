@@ -33,18 +33,17 @@ public class WebSecurityConfig {
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
-
         return http.build();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
+            User.withDefaultPasswordEncoder()
+                .username("user")
+                .password("password")
+                .roles("USER")
+                .build();
 
         return new InMemoryUserDetailsManager(user);
     }
