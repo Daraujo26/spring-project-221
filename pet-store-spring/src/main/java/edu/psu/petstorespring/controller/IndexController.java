@@ -82,10 +82,4 @@ public class IndexController {
         return "home";
     }
 
-    @PostMapping("/login")
-    public String postLogin(Model model) {
-        List<Pet> pets = petService.getPets();
-        model.addAttribute("pets", pets);
-        return "home";
-    }
 }
