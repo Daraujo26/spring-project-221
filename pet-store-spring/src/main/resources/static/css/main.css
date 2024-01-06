@@ -9,3 +9,8 @@ img.logo {
     display: block;
     margin-left: 700px;
 }
+
+.contents {
+    display: block;
+    padding-left: 15px;
+}
