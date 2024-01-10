@@ -64,7 +64,7 @@ public class PetService {
             if (!file.isEmpty()) {
                 String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
                 // Define the path to the uploads directory
-                Path uploadDirectory = Paths.get("petstore/uploads");
+                Path uploadDirectory = Paths.get("/var/spring-project-221/pet-store-spring/petstore/uploads");
 
                 // Create the directory if it does not exist
                 if (!Files.exists(uploadDirectory)) {
