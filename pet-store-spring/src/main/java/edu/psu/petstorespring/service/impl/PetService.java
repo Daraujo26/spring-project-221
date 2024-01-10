@@ -21,12 +21,23 @@ public class PetService {
     @Autowired
     private PetRepository petRepository;
 
+    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024;
+
     public void addPet(Pet pet, MultipartFile imageFile) {
-        System.out.println("Calling storeImage()");
-        String imageUrl = storeImage(imageFile);
-        pet.setImageUrl(imageUrl);
-        petRepository.save(pet);
+        try {
+            String imageUrl = storeImage(imageFile);
+            
+            if (imageUrl != null) {
+                pet.setImageUrl(imageUrl);
+                petRepository.save(pet);
+            } else {
+                throw new RuntimeException("Failed to store image. Image URL is null.");
+            }
+        } catch (RuntimeException e) {
+            System.err.println("Exception occurred: " + e.getMessage());
+        }
     }
+    
 
     public List<Pet> getPets() {
         return petRepository.findAll();
@@ -61,26 +72,27 @@ public class PetService {
     }
 
     private String storeImage(MultipartFile file) {
-        System.out.println("Store Image is properly being called");
         try {
             if (!file.isEmpty()) {
+                if (file.getSize() > MAX_FILE_SIZE) {
+                    throw new RuntimeException("File size exceeds the maximum limit");
+                }
+    
                 String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-                // Define the path to the uploads directory
                 Path uploadDirectory = Paths.get("/var/spring-project-221/pet-store-spring/petstore/uploads");
-                System.out.println("Upload Directory: " + uploadDirectory.toAbsolutePath());
-                // Create the directory if it does not exist
+    
                 if (!Files.exists(uploadDirectory)) {
                     Files.createDirectories(uploadDirectory);
                 }
-
+    
                 Path storagePath = uploadDirectory.resolve(filename);
                 Files.copy(file.getInputStream(), storagePath, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Storage Path: " + storagePath.toAbsolutePath());
+    
                 return "/uploads/" + filename;
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file", e);
         }
         return null;
-    }
+    }    
 }
