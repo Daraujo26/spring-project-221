@@ -22,6 +22,7 @@ public class PetService {
     private PetRepository petRepository;
 
     public void addPet(Pet pet, MultipartFile imageFile) {
+        System.out.println("Calling storeImage()");
         String imageUrl = storeImage(imageFile);
         pet.setImageUrl(imageUrl);
         petRepository.save(pet);
@@ -60,12 +61,13 @@ public class PetService {
     }
 
     private String storeImage(MultipartFile file) {
+        System.out.println("Store Image is properly being called");
         try {
             if (!file.isEmpty()) {
                 String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
                 // Define the path to the uploads directory
                 Path uploadDirectory = Paths.get("/var/spring-project-221/pet-store-spring/petstore/uploads");
-
+                System.out.println("Upload Directory: " + uploadDirectory.toAbsolutePath());
                 // Create the directory if it does not exist
                 if (!Files.exists(uploadDirectory)) {
                     Files.createDirectories(uploadDirectory);
@@ -73,7 +75,7 @@ public class PetService {
 
                 Path storagePath = uploadDirectory.resolve(filename);
                 Files.copy(file.getInputStream(), storagePath, StandardCopyOption.REPLACE_EXISTING);
-
+                System.out.println("Storage Path: " + storagePath.toAbsolutePath());
                 return "/uploads/" + filename;
             }
         } catch (IOException e) {
