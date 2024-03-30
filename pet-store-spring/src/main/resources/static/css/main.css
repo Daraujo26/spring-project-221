@@ -15,7 +15,100 @@ img.logo {
     padding-left: 15px;
 }
 
-#main-navbar {
-    display: block;
-    padding-left: 15px;
+.navbar {
+    min-height: 4rem;
+}
+
+.navbar-brand {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-toggler {
+    position: relative;
+    float: right;
+    right: 0;
+    top: 0.5rem;
+}
+
+.navbar-brand,
+.navbar-nav,
+.navbar-toggler {
+    flex-grow: 1;
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        display: flex;
+        align-items: center;
+        padding-right: 15px;
+    }
+
+    .navbar-brand,
+    .navbar-nav,
+    .navbar-toggler {
+        flex-grow: 0;
+    }
+
+    .navbar-nav {
+        justify-content: flex-start;
+    }
+
+    .navbar-collapse {
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
+    .navbar>form,
+    .navbar-collapse>form {
+        margin-left: auto;
+        padding-right: 15px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .searchButton {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    #navbarSupportedContent {
+        justify-content: flex-end;
+    }
+
+    .navbar-nav {
+        justify-content: center;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+    }
+
+    .nav-item {
+        flex: 0 0 auto;
+        text-align: center;
+    }
+
+    .navbar-collapse>.d-flex {
+        justify-content: center;
+        flex-basis: 100%;
+        order: 2;
+    }
+
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-toggler {
+        position: absolute;
+        right: 1rem;
+    }
+
+    .navbar-expand-lg .navbar-toggler {
+        margin-right: 0;
+    }
 }

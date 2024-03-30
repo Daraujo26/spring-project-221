@@ -14,3 +14,109 @@ img.logo {
     display: block;
     padding-left: 15px;
 }
+
+.navbar {
+    min-height: 4rem;
+}
+
+.navbar-brand {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-toggler {
+    position: relative;
+    float: right;
+    right: 0;
+    top: 0.5rem;
+}
+
+.navbar-brand,
+.navbar-nav,
+.navbar-toggler {
+    flex-grow: 1;
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        display: flex;
+        align-items: center;
+        /* Ensures vertical alignment */
+        padding-right: 15px;
+        /* Adds padding to the right side of the navbar */
+    }
+
+    .navbar-brand,
+    .navbar-nav,
+    .navbar-toggler {
+        flex-grow: 0;
+        /* Ensures these elements do not grow to fill the navbar, aligning them to the left */
+    }
+
+    .navbar-nav {
+        justify-content: flex-start;
+        /* Aligns navbar items (links) to the start/left */
+    }
+
+    .navbar-collapse {
+        flex-grow: 1;
+        /* Allows the container to expand, pushing the search form to the right */
+        justify-content: space-between;
+        /* Spaces out the navbar items and the search form */
+    }
+
+    .navbar>form,
+    .navbar-collapse>form {
+        margin-left: auto;
+        /* Moves the search form to the right */
+        padding-right: 15px;
+        /* Adds padding to prevent touching the screen edge */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .searchButton {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    #navbarSupportedContent {
+        justify-content: flex-end;
+    }
+
+    .navbar-nav {
+        justify-content: center;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+    }
+
+    .nav-item {
+        flex: 0 0 auto;
+        text-align: center;
+    }
+
+    .navbar-collapse>.d-flex {
+        justify-content: center;
+        flex-basis: 100%;
+        order: 2;
+    }
+
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-toggler {
+        position: absolute;
+        right: 1rem;
+    }
+
+    .navbar-expand-lg .navbar-toggler {
+        margin-right: 0;
+    }
+}
